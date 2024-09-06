@@ -15,8 +15,8 @@
 
   & input,
   & button {
-    padding: 0.5rem 1rem;
-    border-radius: 4px;
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
     font-size: 1.25rem;
   }
 
@@ -28,8 +28,8 @@
 
   & button {
     border: 0;
-    font-weight: bold;
-    background: var(--battery-foreground);
+    color: white;
+    background: var(--action-primary);
   }
 }
 

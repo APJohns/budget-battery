@@ -5,6 +5,7 @@
   --battery-foreground-low: #ffcc0a;
   --battery-foreground-very-low: #ff0000;
   --battery-background: rgb(206, 206, 206);
+  --action-primary: #007aff;
 }
 
 @media (prefers-color-scheme: dark) {
