@@ -1,6 +1,8 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --battery-foreground: #34c85a;
+  --battery-background: rgb(206, 206, 206);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -33,6 +35,20 @@ body {
 a {
   color: inherit;
   text-decoration: none;
+}
+
+.visually-hidden {
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
+
+main {
+  text-align: center;
 }
 
 @media (prefers-color-scheme: dark) {

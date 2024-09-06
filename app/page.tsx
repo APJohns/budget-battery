@@ -1,95 +1,89 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+'use client';
+
+import Battery from '@/components/battery';
+import styles from './page.module.css';
+import { ChangeEvent, FormEvent, useEffect, useRef, useState } from 'react';
 
 export default function Home() {
-  return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol>
-          <li>
-            Get started by editing <code>app/page.tsx</code>.
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+  const [budget, setBudget] = useState(200);
+  const [spent, setSpent] = useState(0);
+  const [remaining, setRemaining] = useState(budget - spent);
+  const [inputValue, setInputValue] = useState('');
+  const [history, setHistory] = useState<number[]>([]);
 
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.secondary}
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className={styles.footer}>
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  const addMoney = (e: FormEvent) => {
+    e.preventDefault();
+    setSpent(spent + Number(inputValue));
+    setHistory([...history, spent + Number(inputValue)]);
+    setInputValue('');
+  };
+
+  const handleInput = (e: ChangeEvent<HTMLInputElement>) => {
+    if (!Number.isNaN(Number(e.target.value))) {
+      setInputValue(e.target.value);
+    }
+  };
+
+  const undo = () => {
+    const h = [...history];
+    h.pop();
+    const last = h.at(-1);
+    setSpent(last ? last : 0);
+    setHistory(h);
+  };
+
+  useEffect(() => {
+    setRemaining(budget - spent);
+  }, [budget, spent]);
+
+  useEffect(() => {
+    localStorage.setItem(
+      'spent',
+      JSON.stringify({
+        spent,
+        timestamp: new Date().toISOString(),
+      })
+    );
+  }, [spent]);
+
+  useEffect(() => {
+    const storage = localStorage.getItem('spent');
+    if (storage) {
+      const weekStart = new Date();
+      weekStart.setHours(0);
+      weekStart.setMinutes(0);
+      weekStart.setSeconds(0);
+      weekStart.setMilliseconds(0);
+      while (weekStart.getDay() > 0) {
+        weekStart.setDate(weekStart.getDate() - 1);
+      }
+      const saved = JSON.parse(storage);
+      if (new Date(saved.timestamp) <= weekStart) {
+        setSpent(0);
+      } else {
+        setSpent(Number(saved.spent));
+      }
+    }
+  }, []);
+
+  return (
+    <main className={styles.main}>
+      <h1>Welcome, Ash.</h1>
+      <Battery percent={(remaining / budget) * 100} />
+      <p>
+        ${budget - spent} / ${budget} remaining
+      </p>
+      <form onSubmit={addMoney}>
+        <label className={styles.addMoney}>
+          <span className="visually-hidden">Add money</span>
+          <input ref={inputRef} type="text" inputMode="numeric" autoFocus value={inputValue} onChange={handleInput} />
+        </label>
+        <button type="button" onClick={undo} disabled={history.length === 0}>
+          Undo
+        </button>
+      </form>
+    </main>
   );
 }
