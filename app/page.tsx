@@ -88,7 +88,7 @@ export default function Home() {
       <form className={styles.spendForm} onSubmit={addMoney}>
         <label className={styles.addMoney}>
           <span className="visually-hidden">Add money</span>
-          <input ref={inputRef} type="text" inputMode="numeric" autoFocus value={inputValue} onChange={handleInput} />
+          <input ref={inputRef} type="text" inputMode="numeric" value={inputValue} onChange={handleInput} />
         </label>
         <button type="submit">Spend</button>
       </form>
