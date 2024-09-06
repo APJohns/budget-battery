@@ -1,5 +1,8 @@
 'use client';
 
+// TODO: Internationalize currency
+// TODO: Use a better font
+
 import Battery from '@/components/battery';
 import styles from './page.module.css';
 import { ChangeEvent, FormEvent, useEffect, useRef, useState } from 'react';
@@ -88,7 +91,17 @@ export default function Home() {
       <form className={styles.spendForm} onSubmit={addMoney}>
         <label className={styles.addMoney}>
           <span className="visually-hidden">Add money</span>
-          <input ref={inputRef} type="text" inputMode="numeric" value={inputValue} onChange={handleInput} />
+          <div className={styles.comboInput}>
+            <div className={styles.comboInputPrefix}>$</div>
+            <input
+              ref={inputRef}
+              type="text"
+              inputMode="numeric"
+              className={styles.comboInputField}
+              value={inputValue}
+              onChange={handleInput}
+            />
+          </div>
         </label>
         <button type="submit">Spend</button>
       </form>
