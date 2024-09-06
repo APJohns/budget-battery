@@ -1,11 +1,62 @@
 .main {
-  display: grid;
-  grid-template-columns: 1fr;
+  display: flex;
+  flex-direction: column;
   gap: 2rem;
   margin: auto;
   padding: 1rem;
   max-width: 500px;
-  /* min-height: 100dvh; */
+  min-height: 100dvh;
+}
+
+.spendForm {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.5rem;
+
+  & input,
+  & button {
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+  }
+
+  & input {
+    border: 1px solid var(--battery-background);
+    width: 100%;
+    text-align: center;
+  }
+
+  & button {
+    border: 0;
+    font-weight: bold;
+    background: var(--battery-foreground);
+  }
+}
+
+.controls {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.undo,
+.recharge {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  border: 0;
+  padding: 1rem;
+  height: 1rem;
+  box-sizing: content-box;
+  color: black;
+  background: none;
+
+  & svg {
+    height: 100%;
+  }
+
+  &:disabled {
+    color: var(--battery-background);
+  }
 }
 
 @media (max-width: 600px) {

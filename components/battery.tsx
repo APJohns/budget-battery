@@ -15,13 +15,14 @@ export default function Battery(props: Props) {
       <label htmlFor={batteryId} className="visually-hidden">
         Battery
       </label>
-      <div
-        className={styles.batteryVis}
-        style={{
-          background: `linear-gradient(to right, var(--battery-foreground) ${props.percent}%, var(--battery-background) ${props.percent}%)`,
-        }}
-      >
-        {props.percent}%
+      <div className={styles.batteryVis}>
+        <div
+          className={`${styles.batteryFill} ${props.percent <= 20 ? styles.low : ''} ${
+            props.percent <= 5 ? styles.veryLow : ''
+          }`}
+          style={{ width: props.percent + '%' }}
+        />
+        <div className={styles.batteryPercent}>{props.percent.toFixed(0)}%</div>
         <meter id={batteryId} min="0" max="100" value={props.percent} className="visually-hidden">
           {props.percent + '%'}
         </meter>

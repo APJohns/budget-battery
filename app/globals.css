@@ -2,6 +2,8 @@
   --background: #ffffff;
   --foreground: #171717;
   --battery-foreground: #34c85a;
+  --battery-foreground-low: #ffcc0a;
+  --battery-foreground-very-low: #ff0000;
   --battery-background: rgb(206, 206, 206);
 }
 

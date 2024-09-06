@@ -1,10 +1,23 @@
 .battery {
+  position: relative;
   padding-right: 5%;
   container-name: hero-banner;
   container-type: inline-size;
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: calc(50% - (25% / 2));
+    right: -1px;
+    border-radius: 8px;
+    width: 4%;
+    height: 25%;
+    background: var(--battery-background);
+  }
 }
 
 .batteryVis {
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -15,17 +28,30 @@
   font-weight: bold;
   font-size: 1.5rem;
   font-family: monospace;
-  position: relative;
+  background: var(--battery-background);
+  overflow: hidden;
+}
 
-  &::after {
-    content: '';
-    position: absolute;
-    right: -5%;
-    border-radius: 8px;
-    width: 4%;
-    height: 25%;
-    background: var(--battery-background);
+.batteryFill {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  background: var(--battery-foreground);
+  transition: width 0.5s ease-out;
+
+  &.low {
+    background: var(--battery-foreground-low);
   }
+
+  &.veryLow {
+    background: var(--battery-foreground-very-low);
+  }
+}
+
+.batteryPercent {
+  z-index: 10;
 }
 
 .bolt {
