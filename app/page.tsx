@@ -96,7 +96,7 @@ export default function Home() {
             <input
               ref={inputRef}
               type="text"
-              inputMode="numeric"
+              inputMode="decimal"
               className={styles.comboInputField}
               value={inputValue}
               onChange={handleInput}
