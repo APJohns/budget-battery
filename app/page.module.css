@@ -1,11 +1,18 @@
 .main {
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   gap: 2rem;
   margin: auto;
   padding: 2rem;
   max-width: 500px;
   min-height: 100dvh;
+}
+
+.group {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
 }
 
 .spendForm {
@@ -57,9 +64,7 @@
 
 .controls {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: auto;
+  justify-content: end;
 }
 
 .undo,
