@@ -1,7 +1,6 @@
 'use client';
 
 // TODO: Internationalize currency
-// TODO: Use a better font
 
 import Battery from '@/components/battery';
 import styles from './page.module.css';

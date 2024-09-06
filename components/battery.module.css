@@ -27,7 +27,6 @@
   height: auto;
   font-weight: bold;
   font-size: 1.5rem;
-  font-family: monospace;
   background: var(--battery-background);
   overflow: hidden;
 }

@@ -2,6 +2,9 @@
 
 import { useId } from 'react';
 import styles from './battery.module.css';
+import { Fira_Code } from 'next/font/google';
+
+const firaCode = Fira_Code({ subsets: ['latin'] });
 
 type Props = {
   percent: number;
@@ -15,7 +18,7 @@ export default function Battery(props: Props) {
       <label htmlFor={batteryId} className="visually-hidden">
         Battery
       </label>
-      <div className={styles.batteryVis}>
+      <div className={`${styles.batteryVis} ${firaCode.className}`}>
         <div
           className={`${styles.batteryFill} ${props.percent <= 20 ? styles.low : ''} ${
             props.percent <= 5 ? styles.veryLow : ''
