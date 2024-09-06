@@ -12,6 +12,7 @@
   display: grid;
   grid-template-columns: 1fr;
   gap: 0.5rem;
+  margin-top: auto;
   font-size: 1.25rem;
 
   & input,
