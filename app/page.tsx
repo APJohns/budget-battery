@@ -11,6 +11,7 @@ export default function Home() {
   const [remaining, setRemaining] = useState(budget - spent);
   const [inputValue, setInputValue] = useState('');
   const [history, setHistory] = useState<number[]>([]);
+  const [isReading, setIsReading] = useState(true);
 
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -36,20 +37,6 @@ export default function Home() {
   };
 
   useEffect(() => {
-    setRemaining(budget - spent);
-  }, [budget, spent]);
-
-  useEffect(() => {
-    localStorage.setItem(
-      'spent',
-      JSON.stringify({
-        spent,
-        timestamp: new Date().toISOString(),
-      })
-    );
-  }, [spent]);
-
-  useEffect(() => {
     const storage = localStorage.getItem('spent');
     if (storage) {
       const weekStart = new Date();
@@ -66,8 +53,26 @@ export default function Home() {
       } else {
         setSpent(Number(saved.spent));
       }
+      setIsReading(false);
     }
   }, []);
+
+  useEffect(() => {
+    setRemaining(budget - spent);
+  }, [budget, spent]);
+
+  useEffect(() => {
+    if (!isReading) {
+      localStorage.setItem(
+        'spent',
+        JSON.stringify({
+          spent,
+          timestamp: new Date().toISOString(),
+        })
+      );
+      console.log('update storage');
+    }
+  }, [isReading, spent]);
 
   return (
     <main className={styles.main}>
