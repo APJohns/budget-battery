@@ -5,6 +5,7 @@ import styles from './page.module.css';
 import { ChangeEvent, FormEvent, useEffect, useRef, useState } from 'react';
 
 export default function Home() {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [budget, setBudget] = useState(200);
   const [spent, setSpent] = useState(0);
   const [remaining, setRemaining] = useState(budget - spent);
