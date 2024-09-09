@@ -2,9 +2,10 @@
 
 // TODO: Internationalize currency
 
+import { ChangeEvent, FormEvent, useEffect, useRef, useState } from 'react';
+import store from 'storejs';
 import Battery from '@/components/battery';
 import styles from './page.module.css';
-import { ChangeEvent, FormEvent, useEffect, useRef, useState } from 'react';
 
 export default function Home() {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -51,7 +52,7 @@ export default function Home() {
 
   useEffect(() => {
     if (!isReading) {
-      localStorage.setItem(
+      store.set(
         'spent',
         JSON.stringify({
           spent,
@@ -62,7 +63,7 @@ export default function Home() {
   }, [isReading, spent]);
 
   useEffect(() => {
-    const storage = localStorage.getItem('spent');
+    const storage = store.get('spent');
     if (storage) {
       const weekStart = new Date();
       weekStart.setHours(0);
@@ -80,8 +81,8 @@ export default function Home() {
         setSpent(Number(saved.spent));
         setHistory([saved.spent]);
       }
-      setIsReading(false);
     }
+    setIsReading(false);
   }, []);
 
   return (
