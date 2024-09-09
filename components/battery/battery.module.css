@@ -1,17 +1,20 @@
 .battery {
   position: relative;
-  padding-right: 5%;
   container-name: hero-banner;
   container-type: inline-size;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
 
   &::after {
     content: '';
     position: absolute;
-    top: calc(50% - (25% / 2));
-    right: -1px;
+    top: -16px;
+    right: calc(50% - (25% / 2));
     border-radius: 8px;
-    width: 4%;
-    height: 25%;
+    height: 12px;
+    width: 25%;
     background: var(--battery-background);
   }
 }
@@ -22,9 +25,7 @@
   justify-content: center;
   align-items: center;
   border-radius: 6px;
-  aspect-ratio: 1/0.44;
-  max-width: 500px;
-  height: auto;
+  flex: 1;
   font-weight: bold;
   font-size: 1.5rem;
   background: var(--battery-background);
@@ -34,11 +35,11 @@
 .batteryFill {
   content: '';
   position: absolute;
-  top: 0;
   left: 0;
+  right: 0;
   bottom: 0;
   background: var(--battery-foreground);
-  transition: width 0.5s ease-out;
+  transition: height 0.5s ease-out;
 
   &.low {
     background: var(--battery-foreground-low);

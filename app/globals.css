@@ -54,6 +54,38 @@ main {
   text-align: center;
 }
 
+.app-body {
+  margin: auto;
+  padding: 2rem;
+  max-width: 500px;
+  min-height: 100dvh;
+}
+
+.icon-action {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  border: 0;
+  padding: 1rem;
+  height: 1rem;
+  box-sizing: content-box;
+  color: black;
+  background: none;
+
+  & svg {
+    height: 100%;
+  }
+
+  &:disabled {
+    color: var(--battery-background);
+  }
+}
+
+input,
+button {
+  font-size: 1em;
+}
+
 @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;

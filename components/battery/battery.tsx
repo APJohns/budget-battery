@@ -1,8 +1,8 @@
 'use client';
 
 import { useId } from 'react';
-import styles from './battery.module.css';
 import { Fira_Code } from 'next/font/google';
+import styles from './battery.module.css';
 
 const firaCode = Fira_Code({ subsets: ['latin'] });
 
@@ -23,7 +23,7 @@ export default function Battery(props: Props) {
           className={`${styles.batteryFill} ${props.percent <= 20 ? styles.low : ''} ${
             props.percent <= 5 ? styles.veryLow : ''
           }`}
-          style={{ width: props.percent + '%' }}
+          style={{ height: props.percent + '%' }}
         />
         <div className={styles.batteryPercent}>{props.percent.toFixed(0)}%</div>
         <meter id={batteryId} min="0" max="100" value={props.percent} className="visually-hidden">

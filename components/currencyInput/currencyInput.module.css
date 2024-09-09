@@ -1,0 +1,28 @@
+.comboInput {
+  display: flex;
+}
+
+.comboInputLabel {
+  margin-bottom: 0.5rem;
+  text-align: left;
+}
+
+.comboInputPrefix,
+.comboInputField {
+  padding: 0.75rem 1rem;
+}
+
+.comboInputPrefix {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #666;
+  background: var(--battery-background);
+  border-radius: 8px 0 0 8px;
+}
+
+.comboInputField {
+  border-radius: 0 8px 8px 0;
+  border: 1px solid var(--battery-background);
+  width: 100%;
+}

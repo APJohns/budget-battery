@@ -1,18 +1,33 @@
-.main {
+.appLayout {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   gap: 2rem;
-  margin: auto;
-  padding: 2rem;
-  max-width: 500px;
-  min-height: 100dvh;
 }
 
-.group {
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  & a {
+    display: block;
+    height: 1rem;
+    width: 1rem;
+  }
+
+  & h1 {
+    & img {
+      display: block;
+    }
+  }
+}
+
+.battery {
   display: flex;
   flex-direction: column;
   gap: 2rem;
+  flex: 1;
 }
 
 .spendForm {
@@ -20,16 +35,6 @@
   grid-template-columns: 1fr;
   gap: 0.5rem;
   font-size: 1.25rem;
-
-  & input,
-  & button {
-    font-size: 1em;
-  }
-
-  & input {
-    border: 1px solid var(--battery-background);
-    width: 100%;
-  }
 
   & button {
     border-radius: 8px;
@@ -40,52 +45,9 @@
   }
 }
 
-.comboInput {
-  display: flex;
-}
-
-.comboInputPrefix,
-.comboInputField {
-  padding: 0.75rem 1rem;
-}
-
-.comboInputPrefix {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #666;
-  background: var(--battery-background);
-  border-radius: 8px 0 0 8px;
-}
-
-.comboInputField {
-  border-radius: 0 8px 8px 0;
-}
-
 .controls {
   display: flex;
   justify-content: flex-end;
-}
-
-.undo,
-.recharge {
-  display: flex;
-  justify-content: center;
-  gap: 0.5rem;
-  border: 0;
-  padding: 1rem;
-  height: 1rem;
-  box-sizing: content-box;
-  color: black;
-  background: none;
-
-  & svg {
-    height: 100%;
-  }
-
-  &:disabled {
-    color: var(--battery-background);
-  }
 }
 
 @media (max-width: 600px) {
