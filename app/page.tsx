@@ -16,9 +16,9 @@ const firaCode = Fira_Code({ subsets: ['latin'] });
 
 export default function Home() {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [budget, setBudget] = useState(200);
+  const [budget, setBudget] = useState(1);
   const [spent, setSpent] = useState(0);
-  const [remaining, setRemaining] = useState(budget - spent);
+  const [remaining, setRemaining] = useState(0);
   const [inputValue, setInputValue] = useState('');
   const [history, setHistory] = useState<number[]>([]);
   const [isReading, setIsReading] = useState(true);
