@@ -123,7 +123,12 @@ export default function Home() {
           </button>
         </div>
         <form className={styles.spendForm} onSubmit={addMoney}>
-          <CurrencyInput label="Add money" isLabelVisible={false} onChange={(e) => setInputValue(e.target.value)} />
+          <CurrencyInput
+            label="Add money"
+            isLabelVisible={false}
+            value={inputValue}
+            onChange={(e) => setInputValue(e.target.value)}
+          />
           <button type="submit">Spend</button>
         </form>
       </div>

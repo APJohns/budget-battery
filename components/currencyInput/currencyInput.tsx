@@ -1,4 +1,4 @@
-import { ChangeEvent, InputHTMLAttributes, useEffect, useRef, useState } from 'react';
+import { ChangeEvent, InputHTMLAttributes, useEffect, useState } from 'react';
 import styles from './currencyInput.module.css';
 
 interface Props extends InputHTMLAttributes<HTMLInputElement> {
@@ -10,8 +10,6 @@ interface Props extends InputHTMLAttributes<HTMLInputElement> {
 export default function CurrencyInput({ onChange, label, isLabelVisible = true, value, ...props }: Props) {
   const [inputValue, setInputValue] = useState('');
 
-  const inputRef = useRef<HTMLInputElement>(null);
-
   const handleInput = (e: ChangeEvent<HTMLInputElement>) => {
     if (!Number.isNaN(Number(e.target.value))) {
       setInputValue(e.target.value);
@@ -22,9 +20,7 @@ export default function CurrencyInput({ onChange, label, isLabelVisible = true, 
   };
 
   useEffect(() => {
-    if (value) {
-      setInputValue(value as string);
-    }
+    setInputValue(value as string);
   }, [value]);
 
   return (
@@ -33,7 +29,6 @@ export default function CurrencyInput({ onChange, label, isLabelVisible = true, 
       <div className={styles.comboInput}>
         <div className={styles.comboInputPrefix}>$</div>
         <input
-          ref={inputRef}
           type="text"
           inputMode="decimal"
           className={styles.comboInputField}
