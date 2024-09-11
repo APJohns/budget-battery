@@ -15,7 +15,6 @@ import logo from './logo.png';
 const firaCode = Fira_Code({ subsets: ['latin'] });
 
 export default function Home() {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [budget, setBudget] = useState(1);
   const [spent, setSpent] = useState(0);
   const [remaining, setRemaining] = useState(0);
