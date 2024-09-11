@@ -27,8 +27,21 @@ export default function Battery(props: Props) {
           style={{ height: props.percent + '%' }}
         />
         <div className={styles.batteryInfo}>
-          <div className={styles.batteryPercent}>{props.percent.toFixed(0)}%</div>
-          <div className={styles.batteryValue}>{props.value}</div>
+          <div
+            className={styles.batteryPercent}
+            style={{ '--targetPercent': props.percent } as React.CSSProperties}
+            aria-label={props.percent + '%'}
+          />
+          <div
+            className={styles.batteryValue}
+            style={
+              {
+                '--targetValue': props.value.split('.')[0],
+                '--targetValueDecimal': props.value.split('.')[1],
+              } as React.CSSProperties
+            }
+            aria-label={props.value}
+          />
         </div>
         <meter id={batteryId} min="0" max="100" value={props.percent} className="visually-hidden">
           {props.percent + '%'}

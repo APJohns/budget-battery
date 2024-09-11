@@ -15,7 +15,7 @@ import logo from './logo.png';
 const firaCode = Fira_Code({ subsets: ['latin'] });
 
 export default function Home() {
-  const [budget, setBudget] = useState(1);
+  const [budget, setBudget] = useState(0);
   const [spent, setSpent] = useState(0);
   const [remaining, setRemaining] = useState(0);
   const [inputValue, setInputValue] = useState('');
@@ -23,6 +23,14 @@ export default function Home() {
   const [isReading, setIsReading] = useState(true);
 
   const dialogRef = useRef<HTMLDialogElement>(null);
+
+  const getPercent = () => {
+    if (budget > 0) {
+      return Number(((remaining / budget) * 100).toFixed(0));
+    } else {
+      return 0;
+    }
+  };
 
   const addMoney = (e: FormEvent) => {
     e.preventDefault();
@@ -119,7 +127,7 @@ export default function Home() {
         </div>
       </dialog>
       <div className={styles.battery}>
-        <Battery percent={(remaining / budget) * 100} value={`($${(budget - spent).toFixed(2)})`} />
+        <Battery percent={getPercent()} value={(budget - spent).toFixed(2)} />
       </div>
       <div>
         <div className={styles.controls}>

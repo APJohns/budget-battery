@@ -39,7 +39,7 @@
   right: 0;
   bottom: 0;
   background: var(--battery-foreground);
-  transition: height 0.5s ease-out;
+  transition: height 1s;
 
   &.low {
     background: var(--battery-foreground-low);
@@ -54,9 +54,47 @@
   z-index: 10;
 }
 
+@property --targetPercent {
+  syntax: '<integer>';
+  initial-value: 0;
+  inherits: false;
+}
+
+.batteryPercent {
+  transition: --targetPercent 1s;
+  counter-reset: targetPercent var(--targetPercent);
+
+  &::after {
+    content: counter(targetPercent) '%';
+  }
+}
+
+@property --targetValue {
+  syntax: '<integer>';
+  initial-value: 0;
+  inherits: false;
+}
+
+@property --targetValueDecimal {
+  syntax: '<integer>';
+  initial-value: 0;
+  inherits: false;
+}
+
+.batteryPercent {
+  transition: --targetPercent 1s;
+  counter-reset: targetPercent var(--targetPercent);
+}
+
 .batteryValue {
   font-size: 1rem;
   font-weight: normal;
+  transition: --targetValue 1s, --targetValueDecimal 1s;
+  counter-reset: targetValue var(--targetValue) targetValueDecimal var(--targetValueDecimal);
+
+  &::after {
+    content: '($' counter(targetValue) '.' counter(targetValueDecimal) ')';
+  }
 }
 
 .bolt {
