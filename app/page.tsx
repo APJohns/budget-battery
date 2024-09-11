@@ -102,10 +102,7 @@ export default function Home() {
         </Link>
       </nav>
       <div className={styles.battery}>
-        <Battery percent={(remaining / budget) * 100} />
-        {/* <p>
-          ${budget - spent} / ${budget} remaining
-        </p> */}
+        <Battery percent={(remaining / budget) * 100} value={`($${budget - spent})`} />
       </div>
       <div>
         <div className={styles.controls}>

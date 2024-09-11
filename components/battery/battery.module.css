@@ -50,8 +50,13 @@
   }
 }
 
-.batteryPercent {
+.batteryInfo {
   z-index: 10;
+}
+
+.batteryValue {
+  font-size: 1rem;
+  font-weight: normal;
 }
 
 .bolt {

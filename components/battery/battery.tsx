@@ -8,6 +8,7 @@ const firaCode = Fira_Code({ subsets: ['latin'] });
 
 type Props = {
   percent: number;
+  value: string;
 };
 
 export default function Battery(props: Props) {
@@ -25,7 +26,10 @@ export default function Battery(props: Props) {
           }`}
           style={{ height: props.percent + '%' }}
         />
-        <div className={styles.batteryPercent}>{props.percent.toFixed(0)}%</div>
+        <div className={styles.batteryInfo}>
+          <div className={styles.batteryPercent}>{props.percent.toFixed(0)}%</div>
+          <div className={styles.batteryValue}>{props.value}</div>
+        </div>
         <meter id={batteryId} min="0" max="100" value={props.percent} className="visually-hidden">
           {props.percent + '%'}
         </meter>
