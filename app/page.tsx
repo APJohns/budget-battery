@@ -2,7 +2,7 @@
 
 // TODO: Internationalize currency
 
-import { FormEvent, useEffect, useState } from 'react';
+import { FormEvent, useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { Fira_Code } from 'next/font/google';
 import store from 'storejs';
@@ -22,6 +22,8 @@ export default function Home() {
   const [inputValue, setInputValue] = useState('');
   const [history, setHistory] = useState<number[]>([]);
   const [isReading, setIsReading] = useState(true);
+
+  const dialogRef = useRef<HTMLDialogElement>(null);
 
   const addMoney = (e: FormEvent) => {
     e.preventDefault();
@@ -43,6 +45,11 @@ export default function Home() {
   const recharge = () => {
     setSpent(0);
     setHistory([...history, 0]);
+  };
+
+  const dialogRecharge = () => {
+    recharge();
+    dialogRef.current?.close();
   };
 
   useEffect(() => {
@@ -74,8 +81,7 @@ export default function Home() {
       }
       const saved = JSON.parse(spentStore);
       if (new Date(saved.timestamp) <= weekStart) {
-        setSpent(0);
-        setHistory([0]);
+        dialogRef.current?.showModal();
       } else {
         setSpent(Number(saved.spent));
         setHistory([saved.spent]);
@@ -101,6 +107,18 @@ export default function Home() {
           {/* Settings */}
         </Link>
       </nav>
+      <dialog ref={dialogRef} className={styles.newWeekDialog}>
+        <h2>Recharge?</h2>
+        <p>Looks like its a new week! Do you want to recharge your battery?</p>
+        <div className={styles.dialogActions}>
+          <button className="button-subtle" onClick={() => dialogRef.current?.close()}>
+            Close
+          </button>
+          <button className="button-primary" onClick={dialogRecharge}>
+            Recharge
+          </button>
+        </div>
+      </dialog>
       <div className={styles.battery}>
         <Battery percent={(remaining / budget) * 100} value={`($${budget - spent})`} />
       </div>
@@ -126,7 +144,9 @@ export default function Home() {
             value={inputValue}
             onChange={(e) => setInputValue(e.target.value)}
           />
-          <button type="submit">Spend</button>
+          <button type="submit" className="button-primary">
+            Spend
+          </button>
         </form>
       </div>
     </main>

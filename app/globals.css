@@ -61,6 +61,21 @@ main {
   min-height: 100dvh;
 }
 
+.button-primary {
+  border-radius: 8px;
+  border: 0;
+  padding: 0.75rem 1rem;
+  color: white;
+  background: var(--action-primary);
+}
+
+.button-subtle {
+  color: var(--action-primary);
+  border: 0;
+  background: none;
+  border-radius: 0;
+}
+
 .icon-action {
   display: flex;
   align-items: center;
@@ -79,6 +94,10 @@ main {
   &:disabled {
     color: var(--battery-background);
   }
+}
+
+button:not(:disabled) {
+  cursor: pointer;
 }
 
 input,
