@@ -120,7 +120,7 @@ export default function Home() {
         </div>
       </dialog>
       <div className={styles.battery}>
-        <Battery percent={(remaining / budget) * 100} value={`($${budget - spent})`} />
+        <Battery percent={(remaining / budget) * 100} value={`($${(budget - spent).toFixed(2)})`} />
       </div>
       <div>
         <div className={styles.controls}>
