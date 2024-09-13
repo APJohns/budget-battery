@@ -14,17 +14,27 @@ type Props = {
 export default function Battery(props: Props) {
   const batteryId = useId();
 
+  const getFill = () => {
+    if (props.percent < 0) {
+      return 0;
+    } else if (props.percent > 100) {
+      return 100;
+    } else {
+      return props.percent;
+    }
+  };
+
   return (
     <div className={styles.battery}>
       <label htmlFor={batteryId} className="visually-hidden">
         Battery
       </label>
-      <div className={`${styles.batteryVis} ${firaCode.className}`}>
+      <div className={`${styles.batteryVis} ${firaCode.className} ${props.percent < 0 ? styles.negative : ''}`}>
         <div
           className={`${styles.batteryFill} ${props.percent <= 20 ? styles.low : ''} ${
             props.percent <= 5 ? styles.veryLow : ''
           }`}
-          style={{ height: props.percent + '%' }}
+          style={{ height: getFill() + '%' }}
         />
         <div className={styles.batteryInfo}>
           <div
